@@ -58,9 +58,11 @@ def parseYaml():
     return topics
 
 
+
 def describeTopics():
     
     topicsList = subprocess.check_output([kafka_topics, '--bootstrap-server', bootstrap_server, '--describe'])
+
     if topicsList != b'':
         topicsListNew = []
         
@@ -83,16 +85,11 @@ def describeTopics():
             topicsListNew[n] = dict(map(lambda x: x.split(': '), i.split('\t')))
             topicsListNew[n]['Configs'] = dict(map(lambda x: x.split('='), topicsListNew[n]['Configs'].split(',')))
         return topicsListNew
-        
 
-        
     else: 
         print("no current topics")
         return topicsList
     
-
-
-
 
 def compareLists(importedTopics, describeTopics):
 
@@ -157,7 +154,7 @@ def updateTopics(resultListOfTopics):
 
 
 def recreateTopics(resultListOfTopics):
-    
+
     if recreate == 'all':
         for topic in resultListOfTopics:
             if topic['exists'] == True:
@@ -171,7 +168,6 @@ def recreateTopics(resultListOfTopics):
                 '--config', retentionMs])
     elif recreate == 'changed':
         for topic in resultListOfTopics:
-            
             if  topic['exists'] == True and (topic['partitions-update'] == True or topic['replication-factor-update'] == True):
                 retentionMs = 'retention.ms=' + str(topic['config']['retention.ms'])
                 subprocess.call([kafka_topics, '--bootstrap-server', bootstrap_server, '--delete', '--topic', topic['Topic']])
@@ -194,23 +190,19 @@ def recreateTopics(resultListOfTopics):
             '--config', retentionMs])
 
        
-
-
-
-
 def migrateTopics(resultListOfTopics):
-    
+   
     ##############
     #Create non-existed topics
     createTopics(resultListOfTopics)
+
     ##############
     #Update or recreate existed topics
+
     if migrate == 'update':
         updateTopics(resultListOfTopics)
     elif migrate == 'recreate':
-        recreateTopics(resultListOfTopics)
-        
-    
+        recreateTopics(resultListOfTopics[])
 
 
 importedTopics = parseYaml()
@@ -222,7 +214,7 @@ if delete == 'no':
 elif delete == 'yes':
     deleteTopics(describeTopics)
 else:
-    print("Wrang delete argument")
+    print("Wrong delete argument")
 
 
 
