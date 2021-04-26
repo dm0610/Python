@@ -1,0 +1,50 @@
+- Topic: topic1
+  exists: False
+  partitions: 3
+  partitions-update: False
+  replication-factor: 1
+  replication-factor-update: False
+  config:
+    retention.ms: 604800000
+    retention-ms-update: False
+
+- Topic: topic2
+  exists: False
+  partitions: 5
+  partitions-update: False
+  replication-factor: 1
+  replication-factor-update: False
+  config:
+    retention.ms: 604800000
+    retention-ms-update: False
+
+- Topic: topic3
+  exists: False
+  partitions: 2
+  partitions-update: False
+  replication-factor: 1
+  replication-factor-update: False
+  config:
+    retention.ms: 604800000
+    retention-ms-update: False
+
+- Topic: topic4
+  exists: False
+  partitions: 2
+  partitions-update: False
+  replication-factor: 1
+  replication-factor-update: False
+  config:
+    retention.ms: 604800002
+    retention-ms-update: False
+
+
+- Topic: topic5
+  exists: False
+  partitions: 1
+  partitions-update: False
+  replication-factor: 1
+  replication-factor-update: False
+  config:
+    retention.ms: 604800000
+    retention-ms-update: False
